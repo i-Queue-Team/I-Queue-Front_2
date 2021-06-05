@@ -106,13 +106,41 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 
             return redirect()->intended('dashboard');
-
         } else {
             $validator->getMessageBag()->add('email', 'credenciales erroneas');
             return view('login')->with('errors', $validator->errors());
         }
     }
-    public function logout () {
+    public function registerWeb(Request $request)
+    {
+
+        $validator  =   Validator::make($request->all(), [
+            "name"  =>  "required",
+            "email"  =>  "required|email|unique:users",
+            "password"  =>  "required",
+            "role" => "in:USER,ADMIN",
+        ]);
+        if ($validator->fails()) {
+            return view('registro')->with('errors', $validator->errors());
+        }
+
+        $inputs = $request->all();
+        $inputs["password"] = Hash::make($request->password);
+        $inputs["role"] = $request->role ? $request->role : 'USER';
+        $user   =   User::create($inputs);
+
+
+        if (!is_null($user)) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                return redirect()->intended('dashboard');
+            }else {
+                $validator->getMessageBag()->add('email', 'credenciales erroneas');
+                return view('login')->with('errors', $validator->errors());
+            }
+        }
+    }
+    public function logout()
+    {
         //logout user
         Auth::logout();
         // redirect to homepage

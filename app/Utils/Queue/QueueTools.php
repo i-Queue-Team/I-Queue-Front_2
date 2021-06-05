@@ -16,8 +16,6 @@ class QueueTools
     public static function store_statistic(Request $request)
     {
         //validate queue
-
-
         //queue instance
         $QueueVerifiedUser = new Statistic();
         $QueueVerifiedUser->queue_id = $request->queue_id;
@@ -56,5 +54,10 @@ class QueueTools
     public static function position($queue_id)
     {
         return QueueVerifiedUser::all()->where('queue_id', '=', $queue_id)->count() + 1;
+    }
+    public static function already_in_queue($user_id,$queue_id){
+        $isInQueue = DB::select( DB::raw("select * from queue_verified_users where user_id = $user_id and queue_id = $queue_id"));
+        return empty($isInQueue);
+
     }
 }

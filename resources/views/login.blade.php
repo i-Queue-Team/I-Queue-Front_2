@@ -44,8 +44,6 @@
                             <i class="material-icons prefix">person_pin</i>
                             <label for="email">Email</label>
                             <input type="text" name="email" required>
-
-
                             @if ($errors)
                                 <span class="error">
                                     <span class="helper-text" data-error="wrong"
@@ -64,11 +62,9 @@
                         </p>
                     </form>
                     <br>
-
                     <div class="center-align">
                         <!-- Modal Trigger -->
                         <a class="modal-trigger" href="#modal1">¿Olvidaste tu contraseña?</a>
-
                         <!-- Modal Structure -->
                         <div id="modal1" class="modal" style="min-width: 250px">
                             <div class="modal-content">
@@ -99,11 +95,9 @@
                     <br>
                     </form>
                 </article>
-
             </div>
+        </section>
     </main>
-
-    </section>
     <!--fin login-->
     <br>
     @include('footerlayout')

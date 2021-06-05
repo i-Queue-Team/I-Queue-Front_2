@@ -34,29 +34,30 @@
 
             <div style="border-radius: 1rem; background-color: antiquewhite; padding: 10px; ">
                 <article class="col s6 offset-s3">
-                    <form name="form" method="" action="{{ url('/user') }}">
+                    <form name="form" method="POST" action="{{ url('/register') }}">
+                        @csrf
                         <div class="input-field">
                             <i class="material-icons prefix">person_pin</i>
                             <label for="usuario">Usuario</label>
-                            <input type="text" name="usuario" required>
+                            <input type="text" name="name" value="{{old('name')}}" required>
                         </div>
 
                         <div class="input-field">
                             <i class="material-icons prefix">email</i>
                             <label for="email">email</label>
-                            <input type="email" name="email" required class="validate">
+                            <input type="email" name="email" value="{{old('email')}}" required class="validate">
                         </div>
 
                         <div class="input-field">
                             <i class="material-icons prefix">password</i>
                             <label for="password">Contraseña</label>
-                            <input type="password" name="password" required minlength="8">
+                            <input type="password" name="password" required minlength="4">
                         </div>
 
                         <div class="input-field">
                             <i class="material-icons prefix">password</i>
                             <label for="password2" style="font-size: 0.8em;">Repetir contraseña</label>
-                            <input type="password" name="password2" required minlength="8">
+                            <input type="password" name="password2" required minlength="4">
                         </div>
 
                         <div class="center-align">

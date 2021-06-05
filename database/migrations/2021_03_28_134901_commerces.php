@@ -21,6 +21,7 @@ class Commerces extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->unsignedInteger('user_id');
             $table->timestamps();
+            $table->string('image',200)->nullable();
             //more to add in future
         });
     }

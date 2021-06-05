@@ -51,8 +51,7 @@ Route::get('/login', function () {
 
 
 Route::get("logout", [UserController::class, 'logout']);
-
-
+Route::post("register", [UserController::class, 'registerWeb']);
 Route::post("login", [UserController::class, 'authenticateWeb']);
 
 Route::group( ['middleware' => 'auth' ], function()

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!--iconos material icon-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -37,45 +37,57 @@
     <!--nav extendido-->
     <nav class="nav-extended">
         <div class="nav-wrapper" style="margin-left: 8px;">
-            <a href="{{ url('/home') }}" class="brand-logo"><span class=".center-align">I-Queue</span></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{{ url('/login') }}"><img src="./images/userlogin.png"
-                            style=" padding: 5px 0px 5px 0px; margin-top: 10px;" alt=""></a></li>
-            </ul>
+            <a href="{{ url('/dashboard') }}" class="brand-logo"><span class=".center-align">I-queue
+                    User-Panel</span></a>
+            <ul class="right hide-on-med-and-down">
 
-            <a href="{{ url('/login') }}" data-target="mobile-demo" class="sidenav-trigger"
-                style=" margin: 10px 0px 0px 0px; padding-left: 10px; height: 20px;"><img src="./images/userlogin.png"
-                    alt=""></a>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ Auth::user()->name }}<i
+                            class="material-icons right">account_box</i></a></li>
+            </ul>
         </div>
-        <!--fin nav extendido-->
+
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="nav-content">
             <ul class="tabs tabs-transparent">
-                <li><a href="#Contacto" onclick="section1()">Mapa</a></li>
-                <li><a href="#colas" onclick="section2()">Colas</a></li>
-                <li><a href="#colas" onclick="section3()">Historial</a></li>
+                <li class="tab col s3 "><a class="active" href="#test1">Mapa</a></li>
+                <li class="tab col s3"><a href="#test2">Cola</a></li>
+                <li class="tab col s3 "><a href="#test3">Comercios</a></li>
             </ul>
         </div>
     </nav>
-    <main>
-        <h2 class="center-align" id="tituloSeccion">Mapa I-Queue</h2>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content"  >
 
-        <section class="container">
+        <li><a href="#!">Configuracion</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ url('/logout') }}">Cerrar Sesión</a></li>
+    </ul>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#!">Configuracion</a></li>
+        <li><a href="{{ url('/logout') }}"> Cerrar Sesión </a></li>
+    </ul>
+    <main class="center-align">
+        <!--fin menu-->
+        <div id="test1" class="col s12 queue-animate-bottom">
+            <!--tab datos-->
+            <h2 class="center-align" id="tituloSeccion">Mapa I-Queue</h2>
 
-            <div id="map">
+            <section class="container">
+                <div id="map"></div>
+            </section>
 
-            </div>
-
-            <div id="colas" hidden="true">
-                <p>colas contenido</p>
-            </div>
-
-            <div id="historial" hidden="true">
-                <p>historial contenido</p>
-            </div>
-        </section>
-        <!--fin login-->
-        <br>
+        </div>
+        <div id="test2" class="col s12 queue-animate-bottom">
+            <!--tab datos-->
+            <h2>Nombre Cola</h2>
+        </div>
+        <div id="test3" class="col s12 queue-animate-bottom">
+            <!--tab datos-->
+            <h2>Configuracion</h2>
+        </div>
     </main>
+
+
     <!--fin menu-->
 
     @include('footerlayout')
@@ -86,43 +98,7 @@
 
 </body>
 
-<script>
-    //secciones por funciones
-    function section1() {
-        var titulo = document.getElementById("tituloSeccion");
-        titulo.textContent = "Mapa de negocios"
-        var contenido = document.getElementById("map");
-        contenido.hidden = false;
-        var contenido2 = document.getElementById("colas");
-        contenido2.hidden = true
-        var contenido3 = document.getElementById("historial");
-        contenido3.hidden = true
 
-    }
-
-    function section2() {
-        var titulo = document.getElementById("tituloSeccion");
-        titulo.textContent = "Tus colas"
-        var contenido = document.getElementById("map");
-        contenido.hidden = true;
-        var contenido2 = document.getElementById("colas");
-        contenido2.hidden = false
-        var contenido3 = document.getElementById("historial");
-        contenido3.hidden = true
-    }
-
-    function section3() {
-        var titulo = document.getElementById("tituloSeccion");
-        titulo.textContent = "historial"
-        var contenido = document.getElementById("map");
-        contenido.hidden = true;
-        var contenido2 = document.getElementById("colas");
-        contenido2.hidden = true
-        var contenido3 = document.getElementById("historial");
-        contenido3.hidden = false
-    }
-
-</script>
 
 
 <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -320,6 +296,16 @@
 <link rel="stylesheet" href="./css/materialize.css">
 
 <!-- Compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.tabs').tabs();
+
+        $(".dropdown-trigger").dropdown({  constrainWidth: false });
+    });
+
+</script>
 
 </html>
